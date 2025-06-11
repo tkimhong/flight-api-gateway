@@ -34,25 +34,25 @@ function authRole(role) {
 // Redirect to the registration microservice
 app.use("/reg", (req, res) => {
   console.log("INSIDE API GATEWAY REGISTRATION ROUTE");
-  proxy.web(req, res, { target: "http://localhost:5001" });
+  proxy.web(req, res, { target: "http://3.80.97.206:5001" });
 });
 
 // Redirect to the login (authentication) microservice
 app.use("/auth", (req, res) => {
   console.log("INSIDE API GATEWAY LOGIN ROUTE");
-  proxy.web(req, res, { target: "http://localhost:5002" });
+  proxy.web(req, res, { target: "http://3.80.97.206:5002" });
 });
 
 // Redirect to the customer microservice
 app.use("/customer", authToken, authRole("customer"), (req, res) => {
   console.log("INSIDE API GATEWAY CUSTOMER ROUTE");
-  proxy.web(req, res, { target: "http://localhost:5003" });
+  proxy.web(req, res, { target: "http://18.212.50.45:5003" });
 });
 
 // Redirect to the admin microservice
 app.use("/admin", authToken, authRole("admin"), (req, res) => {
   console.log("INSIDE API GATEWAY ADMIN ROUTE");
-  proxy.web(req, res, { target: "http://localhost:5004" });
+  proxy.web(req, res, { target: "http://54.208.15.125:5004" });
 });
 
 app.listen(4000, () => {
